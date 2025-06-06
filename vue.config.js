@@ -1,4 +1,10 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require('@vue/cli-service');
 module.exports = defineConfig({
-  transpileDependencies: true
-})
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "vue3-sketch-ruler/lib/style.css";`,
+      }
+    }
+  }
+});

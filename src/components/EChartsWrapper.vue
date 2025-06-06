@@ -9,7 +9,7 @@ import * as echarts from 'echarts'
 const props = defineProps({
   type: {
     type: String,
-    default: 'pie'
+    required: true
   },
   options: {
     type: Object,
