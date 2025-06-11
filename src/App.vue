@@ -13,9 +13,12 @@ export default {
 </script>
 
 <style>
+html,body {
+  overflow: hidden;
+}
 body{
   height: 98vh;
-  margin: 0;
+  margin: 10px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
