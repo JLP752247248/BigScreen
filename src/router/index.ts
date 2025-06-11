@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LayoutTest from '../components/LayoutTest.vue'
 import HelloWorld from '../components/HelloWorld.vue'
+import CanvasTest from '@/components/CanvasTest.vue'
 
 const routes = [
   {
@@ -12,6 +13,10 @@ const routes = [
     path: '/layout',
     name: 'LayoutTest',
     component: LayoutTest
+  },{
+    path: '/canvas',
+    name: 'CanvasTest',
+    component: CanvasTest
   }
 ]
 
