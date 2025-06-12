@@ -20,7 +20,7 @@ export function setLast(
   ctx.save()
   isHorizontal ? ctx.translate(x + 5, height * 0.2) : ctx.translate(width * 0.1, x + 32)
   if (!isHorizontal) ctx.rotate(-Math.PI / 2) // 旋转 -90 度
-  ctx.fillText(Math.round(value).toString(), 4, 7)
+  ctx.fillText(Math.round(value).toString(), 40, 70)
   ctx.restore()
   isHorizontal ? ctx.lineTo(x, height) : ctx.lineTo(width, x)
   ctx.stroke()
@@ -44,7 +44,7 @@ export function drawShadowText(
   // 设置字体为加粗
   ctx.font = 'bold 12px  Aria'
   // ctx.strokeText(String(num), 0, 0)
-  ctx.fillText(String(num), 0, 0)
+  ctx.fillText(String(num), 50, 50)
   ctx.restore()
 }
 
@@ -139,7 +139,11 @@ export const drawCanvasRuler = (
       //setLast(xl, endNum, width, height, ctx, isHorizontal)
       return
     }
-
+      // 3. 画刻度和文字
+    ctx.beginPath()
+    ctx.fillStyle = fontColor
+    ctx.strokeStyle = longfgColor
+    ctx.lineWidth=2;
     if (value >= 0 && value <= endNum) {
       if (value == 0) {
         if (isHorizontal) {
@@ -152,13 +156,40 @@ export const drawCanvasRuler = (
       } else {
         if (isHorizontal) {
           ctx.moveTo(x, 20)
-          ctx.lineTo(x, height / 1.3)
+          ctx.lineTo(x, height / 3)
         } else {
           ctx.moveTo(20, x)
-          ctx.lineTo(width / 1.3, x)
+          ctx.lineTo(width / 3, x)
         }
       }
-      ctx.save()
+      ctx.stroke()
+
+
+      //绘制短可读
+      const devide = gridPixel10;
+      if(devide % 5 === 0){
+        ctx.beginPath()
+        ctx.fillStyle = fontColor
+        ctx.strokeStyle = longfgColor
+        ctx.lineWidth=1;
+        const step = gridPixel10/5;
+        //画五个短刻度
+        for(let st=1;st<5;st++){
+           const idx = x+ st* step;
+           if (isHorizontal) {
+            ctx.moveTo(idx, 20)
+            ctx.lineTo(idx, height*0.6)
+          } else {
+            ctx.moveTo(20, idx)
+            ctx.lineTo(width*0.6, idx)
+          }
+          ctx.save()
+        }
+        ctx.stroke()
+
+      }
+
+
       // 影响文字位置
       if (value == 0) {
         isHorizontal ? ctx.translate(x - 15, height * 0.01) : ctx.translate(width * 0.3, x - 5)
@@ -178,14 +209,12 @@ export const drawCanvasRuler = (
           (Math.abs(value - selectStart) > gridSize10 / 2 &&
             Math.abs(value - (selectStart + selectLength)) > gridSize10 / 2)
         ) {
-          ctx.fillText(value.toString(), 4, 9)
+          ctx.fillText(value.toString(), 15, 9)
         }
       }
       ctx.restore()
     }
   }
-  ctx.stroke()
-  ctx.closePath()
 }
 
 interface IDebounce {

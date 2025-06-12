@@ -1,5 +1,8 @@
 <template>
-  <div ref="chartEl" style="width:100%;height:100%"></div>
+  <div ref="chartEl" :style="{
+              width: props.width + 'px',
+              height: props.height + 'px',
+            }"></div>
 </template>
 
 <script setup>
@@ -11,6 +14,14 @@ const props = defineProps({
     type: String,
     required: true
   },
+  width:{
+    type: Number,
+    default: 100
+  },
+  height:{
+    type: Number,
+    default: 100
+  },
   options: {
     type: Object,
     default: () => ({})
@@ -21,8 +32,9 @@ const chartEl = ref(null)
 let chartInstance = null
 
 const initChart = () => {
-  if (!chartEl.value) return
-  
+  if (!chartEl.value || chartEl.value.clientHeight === 0) {
+    return setTimeout(initChart, 50)
+  }
   chartInstance = echarts.init(chartEl.value)
   const options = getDefaultOptions()
   chartInstance.setOption(options)
@@ -61,4 +73,15 @@ watch(() => props.options, (newVal) => {
     chartInstance.setOption(newVal)
   }
 }, { deep: true })
+
+watch(() =>[props.height, props.width], ([newHeight, newWidth]) => {
+  console.log([newHeight, newWidth]);
+  if (chartInstance) {
+    chartInstance.resize({ 
+      width: newWidth - 10,
+      height: newHeight - 10 
+    })
+  }
+}, { deep: true })
+
 </script>

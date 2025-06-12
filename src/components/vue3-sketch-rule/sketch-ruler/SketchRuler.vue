@@ -149,7 +149,7 @@ const cornerStyle = computed(() => {
 })
 const rectStyle = computed(() => {
   return {
-    background: paletteCpu.value.bgColor,
+    //background: paletteCpu.value.bgColor,
     width: rectWidth.value + 'px',
     height: rectHeight.value + 'px'
   }
@@ -338,9 +338,9 @@ defineExpose({
   z-index: 3;
   /* 需要比resizer高 */
   width: 100%;
-  height: 100%;
   overflow: scroll;
   font-size: 12px;
+   height:calc(100% - 35px);
  }
   .canvasedit-parent {
     position: absolute;
