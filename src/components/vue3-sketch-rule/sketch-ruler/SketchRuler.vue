@@ -6,6 +6,7 @@
         <slot></slot>
       </div>
     </div>
+    <a v-show="true"   class="corner" :style="cornerStyle" @click="onCornerClick"></a>
     <!-- 水平方向 -->
     <RulerWrapper
       v-show="showRuler"
@@ -22,7 +23,7 @@
       :snap-threshold="snapThreshold"
       :snaps-obj="snapsObj"
       :select-length="shadow.width"
-      :scale="ownScale"
+      :scale="scale"
       :palette="paletteCpu"
       :canvas-width="canvasWidth"
       :show-shadow-text="showShadowText"
@@ -48,7 +49,7 @@
       :select-length="shadow.height"
       :snap-threshold="snapThreshold"
       :snaps-obj="snapsObj"
-      :scale="ownScale"
+      :scale="scale"
       :palette="paletteCpu"
       :canvas-width="canvasWidth"
       :canvas-height="canvasHeight"
@@ -58,7 +59,8 @@
       :lock-line="lockLine"
       @change-line-state="changeLineState"
     />
-    <a v-show="showRuler" class="corner" :style="cornerStyle" @click="onCornerClick"></a>
+    
+    
   </div>
 </template>
 
@@ -210,12 +212,12 @@ const handleSpaceKeyUp = (e: KeyboardEvent) => {
 onMounted(() => {
   console.log('initprops')
   console.log(props)
-  initPanzoom()
+  //initPanzoom()
   console.log(props)
   if (!props.selfHandle && elem.value) {
     const parent = elem.value.parentElement
     if (!parent) return
-    parent.addEventListener('wheel', handleWheel)
+   // parent.addEventListener('wheel', handleWheel)
     document.addEventListener('keydown', handleSpaceKeyDown)
     document.addEventListener('keyup', handleSpaceKeyUp)
   }
@@ -226,8 +228,7 @@ const getPanOptions = (scale: number) => {
     noBind: true,
     startScale: scale,
     // cursor: 'default',
-    startX: zoomStartX,
-    startY: zoomStartY,
+    origin: "600 400",
     smoothScroll: true,
     canvas: true,
     ...props.panzoomOption
@@ -338,7 +339,7 @@ defineExpose({
   z-index: 3;
   /* 需要比resizer高 */
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
   font-size: 12px;
    height:calc(100% - 35px);
  }
@@ -346,10 +347,9 @@ defineExpose({
     position: absolute;
     left: 20px;
     top: 20px;
-
   }
   .canvasedit{
-
+    overflow: visible!important;
   }
   .corner {
     position: absolute;
@@ -368,5 +368,4 @@ defineExpose({
   .grabCursor {
     cursor: grab !important;
   }
-
 </style>

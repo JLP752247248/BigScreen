@@ -4,6 +4,8 @@ import LayoutTest from '../components/LayoutTest.vue'
 import HelloWorld from '../components/HelloWorld.vue'
 import CanvasTest from '@/components/CanvasTest.vue'
 
+import ZoomTest from '@/components/ZoomTest.vue'
+
 const routes = [
   {
     path: '/',
@@ -17,6 +19,10 @@ const routes = [
     path: '/canvas',
     name: 'CanvasTest',
     component: CanvasTest
+  },{
+    path: '/zoom',
+    name: 'ZoomTest',
+    component: ZoomTest
   }
 ]
 

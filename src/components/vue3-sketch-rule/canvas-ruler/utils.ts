@@ -136,7 +136,7 @@ export const drawCanvasRuler = (
     if ((value - gridSize10 < endNum && value > endNum) || value == endNum) {
       // 如果尾数画最后一个刻度
       const xl = offsetX10 + count * gridPixel10 + 0.5 + (endNum - value) * scale
-      //setLast(xl, endNum, width, height, ctx, isHorizontal)
+      setLast(xl, endNum, width, height, ctx, isHorizontal)
       return
     }
       // 3. 画刻度和文字

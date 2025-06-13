@@ -1,7 +1,8 @@
 
 // vue.config.js
 module.exports = {
-        lintOnSave: false,  // 关闭所有 ESLint 校验:ml-citation{ref="2,4" data="citationList"}
+
+  lintOnSave: false,  // 关闭所有 ESLint 校验:ml-citation{ref="2,4" data="citationList"}
 
   configureWebpack: {
     module: {
