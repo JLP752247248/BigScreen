@@ -457,7 +457,7 @@ const resetZoom = () => {
   background-color: #fffacd;
   background-image: radial-gradient(#ff0000 1px, transparent 1px);
   background-size: 50px 50px;
-  margin: 50px 50px;
+  margin: 30px 30px;
   width: 900px;
   height: 700px;
   position: absolute;
